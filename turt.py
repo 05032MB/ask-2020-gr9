@@ -32,7 +32,7 @@ def rot_right():
 
 def toggle_write():
     ser.write('8'.encode('utf-8'))
-    if(turt.isDown()):
+    if(turt.isdown()):
         turt.up()
     else:
         turt.down()
