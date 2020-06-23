@@ -1,12 +1,23 @@
 from turtle import *
 from serial import *
 from time import sleep
+import os
+
+def get_usb_device():
+    usb_devices = list(filter(lambda d : 'usb' in d.lower(), os.listdir('/dev/')))
+    if len(usb_devices) == 1:
+        print(f'Found {usb_devices[0]}')
+        return usb_devices[0]
+    print("Which device is the ROBOT?")
+    for i, d in enumerate(usb_devices):
+        print(f'{i}: {d}')
+    idx = int(input())
+    return usb_devices[idx]
 
 turt = Turtle()
+usb = get_usb_device()
 
-ser = Serial("/dev/ttyUSB1", 9600)
-
-showturtle()
+ser = Serial(f"/dev/{usb}", 9600)
 
 def turt_debug_bearing():
     print("Turt bearing: ", turt.heading())
@@ -49,6 +60,8 @@ onkey(onward, "Up")
 onkey(rot_left, "Left")
 onkey(rot_right, "Right")
 onkey(toggle_write, 'u')
+onkey(lambda : turt.down(), 'D')
+onkey(lambda : turt.up(), 'U')
 #onkey(back, "Down")
 
 listen()
