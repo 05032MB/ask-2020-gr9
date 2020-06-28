@@ -1,10 +1,10 @@
 #include <Stepper.h>
 #include <SoftwareSerial.h>
 
-#define IN1  8
-#define IN2  9
-#define IN3  10
-#define IN4  11
+#define IN1  7 // 8
+#define IN2  6 // 9
+#define IN3  5 // 10
+#define IN4  10 // 11
 
 // Defines the number of steps per rotation
 const int stepsPerRevolution = 2038;
@@ -17,8 +17,8 @@ const int stepsPerRevolution = 2038;
 Stepper myStepper = Stepper(stepsPerRevolution, IN1, IN3, IN2, IN4);
 
 
-#define verticalMotorPIN 5
-#define upDownMotorPIN 6
+#define verticalMotorPIN 3 // 5
+#define upDownMotorPIN 9 // 6
 
 
 const int wypelnienieDown = 2;
