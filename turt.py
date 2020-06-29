@@ -16,14 +16,14 @@ def get_usb_device():
     return usb_devices[idx]
 
 turt = Turtle()
-usb = get_usb_device()
+usb = get_usb_device() #wybór urządzenia USB (znalezienie podłączonego robota)
 
 ser = Serial(f"/dev/{usb}", 9600)
 
 def turt_debug_bearing():
     print("Turt bearing: ", turt.heading())
 
-def onward():
+def onward():   #przesunięcie wskaźnika do przodu (rysowanie linii)
     bear = (turt.heading() - 90) // 45;
     if (bear < 0):
         bear = 8 - abs(bear)
@@ -34,15 +34,15 @@ def onward():
     turt.forward(45)
     ser.write(chr(int(bear)).encode('utf-8'))
 
-def rot_left():
+def rot_left(): #obrót w lewo
     turt.left(45)
     turt_debug_bearing()
 
-def rot_right():
+def rot_right(): #obrót w prawo
     turt.right(45)
     turt_debug_bearing()
 
-def toggle_write():
+def toggle_write(): #podniesienie/opuszczenie pisaka
     ser.write('8'.encode('utf-8'))
     if(turt.isdown()):
         turt.up()
